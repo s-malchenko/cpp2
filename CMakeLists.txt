@@ -6,4 +6,5 @@ set(CMAKE_CXX_FLAGS "-std=c++17 -std=gnu++17")
 project (course)
 add_executable(	course
 				#main.cpp)
-                matrix_sum.cpp)
+                #matrix_sum.cpp)
+                average_temperature.cpp)
