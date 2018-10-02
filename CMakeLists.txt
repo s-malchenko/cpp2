@@ -7,4 +7,5 @@ project (course)
 add_executable(	course
 				#main.cpp)
                 #matrix_sum.cpp)
-                average_temperature.cpp)
+                #average_temperature.cpp)
+                blocks_weight.cpp)
