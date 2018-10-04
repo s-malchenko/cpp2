@@ -5,23 +5,24 @@
 
 using namespace std;
 
-template <typename T1> T1 Sqr(T1 v);
-template <typename T1, typename T2> pair<T1, T2> Sqr(const pair<T1, T2> p);
+template <typename T1> T1 Sqr(const T1 &v);
+template <typename T1, typename T2> pair<T1, T2> Sqr(const pair<T1, T2> &p);
 template <typename T> vector<T> Sqr(const vector <T> &v);
 template <typename T1, typename T2> map<T1, T2> Sqr(const map<T1, T2> &m);
 
 template <typename T1>
-T1 Sqr(T1 v)
+T1 Sqr(const T1 &v)
 {
     return v * v;
 }
 
 template <typename T1, typename T2>
-pair<T1, T2> Sqr(const pair<T1, T2> p)
+pair<T1, T2> Sqr(const pair<T1, T2> &p)
 {
     pair<T1, T2> result = p;
     result.first = Sqr(result.first);
     result.second = Sqr(result.second);
+    return result;
 }
 
 template <typename T>
