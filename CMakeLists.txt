@@ -9,4 +9,5 @@ add_executable(	course
                 #matrix_sum.cpp)
                 #average_temperature.cpp)
                 #blocks_weight.cpp)
-                region_base.cpp)
+                #region_base.cpp)
+                team_tasks.cpp)
