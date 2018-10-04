@@ -10,4 +10,5 @@ add_executable(	course
                 #average_temperature.cpp)
                 #blocks_weight.cpp)
                 #region_base.cpp)
-                team_tasks.cpp)
+                #team_tasks.cpp)
+                sqr_all.cpp)
