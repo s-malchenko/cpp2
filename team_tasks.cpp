@@ -1,21 +1,69 @@
 #include <tuple>
 #include <map>
-
+#include <iostream>
 
 using namespace std;
 
-// Перечислимый тип для статуса задачи
-enum class TaskStatus
-{
-    NEW,          // новая
-    IN_PROGRESS,  // в разработке
-    TESTING,      // на тестировании
-    DONE          // завершена
-};
+// // Перечислимый тип для статуса задачи
+// enum class TaskStatus
+// {
+//     NEW,          // новая
+//     IN_PROGRESS,  // в разработке
+//     TESTING,      // на тестировании
+//     DONE          // завершена
+// };
 
-// Объявляем тип-синоним для map<TaskStatus, int>,
-// позволяющего хранить количество задач каждого статуса
-using TasksInfo = map<TaskStatus, int>;
+// // Объявляем тип-синоним для map<TaskStatus, int>,
+// // позволяющего хранить количество задач каждого статуса
+// using TasksInfo = map<TaskStatus, int>;
+
+void clearNullStatuses(TasksInfo &tasks)
+{
+    if (!tasks[TaskStatus::NEW])
+    {
+        tasks.erase(TaskStatus::NEW);
+    }
+
+    if (!tasks[TaskStatus::IN_PROGRESS])
+    {
+        tasks.erase(TaskStatus::IN_PROGRESS);
+    }
+
+    if (!tasks[TaskStatus::TESTING])
+    {
+        tasks.erase(TaskStatus::TESTING);
+    }
+
+    if (!tasks[TaskStatus::DONE])
+    {
+        tasks.erase(TaskStatus::DONE);
+    }
+}
+
+
+int taskInStatus(const TasksInfo &tasks, TaskStatus status)
+{
+    try
+    {
+        return tasks.at(status);
+    }
+    catch (...)
+    {
+        return 0;
+    }
+}
+
+TasksInfo operator+(const TasksInfo &lhs, const TasksInfo &rhs)
+{
+    TasksInfo result = lhs;
+
+    result[TaskStatus::NEW] += taskInStatus(rhs, TaskStatus::NEW);
+    result[TaskStatus::IN_PROGRESS] += taskInStatus(rhs, TaskStatus::IN_PROGRESS);
+    result[TaskStatus::TESTING] += taskInStatus(rhs, TaskStatus::TESTING);
+    result[TaskStatus::DONE] += taskInStatus(rhs, TaskStatus::DONE);
+    clearNullStatuses(result);
+    return result;
+}
 
 class TeamTasks
 {
@@ -23,7 +71,15 @@ public:
     // Получить статистику по статусам задач конкретного разработчика
     const TasksInfo &GetPersonTasksInfo(const string &person) const
     {
-        return _teamTasks[person];
+        static const TasksInfo emptyTasks;
+        try
+        {
+            return _teamTasks.at(person);
+        }
+        catch (...)
+        {
+            return emptyTasks;
+        }
     }
 
     // Добавить новую задачу (в статусе NEW) для конкретного разработчитка
@@ -34,21 +90,50 @@ public:
 
     // Обновить статусы по данному количеству задач конкретного разработчика,
     // подробности см. ниже
-    tuple<TasksInfo, TasksInfo> PerformPersonTasks(
-        const string &person, int task_count)
+    tuple<TasksInfo, TasksInfo> PerformPersonTasks(const string &person, int task_count)
     {
-        for (int i = 0; i < task_count; ++i)
+        TasksInfo oldTasks, newTasks;
+
+        try
         {
-            //TODO
+            oldTasks = _teamTasks.at(person);
+        }
+        catch (...)
+        {
+            return make_tuple(newTasks, oldTasks); // разработчика нет
         }
 
+        while (task_count--)
+        {
+            if (oldTasks[TaskStatus::NEW])
+            {
+                ++newTasks[TaskStatus::IN_PROGRESS];
+                --oldTasks[TaskStatus::NEW];
+            }
+            else if (oldTasks[TaskStatus::IN_PROGRESS])
+            {
+                ++newTasks[TaskStatus::TESTING];
+                --oldTasks[TaskStatus::IN_PROGRESS];
+            }
+            else if (oldTasks[TaskStatus::TESTING])
+            {
+                ++newTasks[TaskStatus::DONE];
+                --oldTasks[TaskStatus::TESTING];
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        clearNullStatuses(oldTasks);
+        clearNullStatuses(newTasks);
+        _teamTasks[person] = oldTasks + newTasks;
+        oldTasks.erase(TaskStatus::DONE);
+        return make_tuple(newTasks, oldTasks);
     }
 private:
     map<string, TasksInfo> _teamTasks;
-    TaskStatus proceedOneTask(const TasksInfo &tasks)
-    {
-        //TODO
-    }
 };
 
 // Принимаем словарь по значению, чтобы иметь возможность
