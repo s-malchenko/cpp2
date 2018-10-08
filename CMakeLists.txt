@@ -11,4 +11,6 @@ add_executable(	course
                 #blocks_weight.cpp)
                 #region_base.cpp)
                 #team_tasks.cpp)
-                sqr_all.cpp)
+                #sqr_all.cpp)
+                element_reference.cpp)
+
