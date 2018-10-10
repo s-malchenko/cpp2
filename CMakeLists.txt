@@ -12,5 +12,5 @@ add_executable(	course
                 #region_base.cpp)
                 #team_tasks.cpp)
                 #sqr_all.cpp)
-                element_reference.cpp)
-
+                #element_reference.cpp)
+                bus_stops1_decomposition.cpp)
