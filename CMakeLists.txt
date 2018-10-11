@@ -14,4 +14,5 @@ add_executable(	course
                 #sqr_all.cpp)
                 #element_reference.cpp)
                 #bus_stops1_decomposition.cpp)
-                test_equation.cpp)
+                #test_equation.cpp)
+                test_person.cpp)
