@@ -17,4 +17,5 @@ add_executable(	course
                 #test_equation.cpp)
                 #test_person.cpp)
                 #test_rational.cpp)
-                test_palindrome.cpp)
+                #test_palindrome.cpp)
+                print_vector_part.cpp)
