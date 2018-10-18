@@ -19,4 +19,5 @@ add_executable(	course
                 #test_rational.cpp)
                 #test_palindrome.cpp)
                 #print_vector_part.cpp)
-                find_greater_elements.cpp)
+                #find_greater_elements.cpp)
+                split_into_words.cpp)
