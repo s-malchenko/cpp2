@@ -20,4 +20,5 @@ add_executable(	course
                 #test_palindrome.cpp)
                 #print_vector_part.cpp)
                 #find_greater_elements.cpp)
-                split_into_words.cpp)
+                #split_into_words.cpp)
+                remove_duplicates.cpp)
