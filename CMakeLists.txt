@@ -22,4 +22,5 @@ add_executable(	course
                 #find_greater_elements.cpp)
                 #split_into_words.cpp)
                 #remove_duplicates.cpp)
-                print_permutations.cpp)
+                #print_permutations.cpp)
+                print_stats.cpp)
