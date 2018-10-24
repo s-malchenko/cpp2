@@ -23,4 +23,6 @@ add_executable(	course
                 #split_into_words.cpp)
                 #remove_duplicates.cpp)
                 #print_permutations.cpp)
-                print_stats.cpp)
+                #print_stats.cpp)
+                #merge_sort_div2.cpp)
+                merge_sort_div3.cpp)
