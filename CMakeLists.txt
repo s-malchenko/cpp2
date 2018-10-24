@@ -25,4 +25,5 @@ add_executable(	course
                 #print_permutations.cpp)
                 #print_stats.cpp)
                 #merge_sort_div2.cpp)
-                merge_sort_div3.cpp)
+                #merge_sort_div3.cpp)
+                find_nearest_element.cpp)
