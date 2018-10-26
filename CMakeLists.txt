@@ -27,4 +27,6 @@ add_executable(	course
                 #merge_sort_div2.cpp)
                 #merge_sort_div3.cpp)
                 #find_nearest_element.cpp)
-                person_names.cpp)
+                #person_names.cpp)
+                #find_starts_with_char.cpp)
+                find_starts_with_string.cpp)
