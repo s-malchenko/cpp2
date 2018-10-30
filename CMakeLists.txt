@@ -32,4 +32,5 @@ add_executable(	course
                 #find_starts_with_string.cpp)
                 #build_expression.cpp)
                 #build_expression_cool.cpp)
-                inheritance.cpp)
+                #inheritance.cpp)
+                notifiers.cpp)
