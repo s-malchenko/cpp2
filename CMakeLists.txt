@@ -33,4 +33,5 @@ add_executable(	course
                 #build_expression.cpp)
                 #build_expression_cool.cpp)
                 #inheritance.cpp)
-                notifiers.cpp)
+                #notifiers.cpp)
+                figures.cpp)
