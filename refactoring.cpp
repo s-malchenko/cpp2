@@ -11,12 +11,12 @@ public:
 
     virtual void Walk(const string &destination) const
     {
-        cout << this->Description() << " walks to " << destination << endl;
+        Description() << " walks to " << destination << endl;
     }
 
-    string Description() const
+    ostream &Description() const
     {
-        return type_ + ": " + name_;
+        return cout << type_ + ": " + name_;
     }
 
     const string name_;
@@ -33,18 +33,18 @@ public:
 
     void Learn() const
     {
-        cout << this->Description() << " learns" << endl;
+        Description() << " learns" << endl;
     }
 
     void Walk(const string &destination) const override
     {
-        cout << this->Description() << " walks to: " << destination << endl;
-        this->SingSong();
+        Human::Walk(destination);
+        SingSong();
     }
 
     void SingSong() const
     {
-        cout << this->Description() << " sings a song: " << favouriteSong_ << endl;
+        Description() << " sings a song: " << favouriteSong_ << endl;
     }
 
 private:
@@ -62,7 +62,7 @@ public:
 
     void Teach() const
     {
-        cout << this->Description() << " teaches: " << subject_ << endl;
+        Description() << " teaches: " << subject_ << endl;
     }
 
 private:
@@ -76,7 +76,7 @@ public:
 
     void Check(const Human &h)
     {
-        cout << this->Description() << " checks " << h.type_ << ". " << h.type_ << "'s name is: " << h.name_ << endl;
+        Description() << " checks " << h.type_ << ". " << h.type_ << "'s name is: " << h.name_ << endl;
     }
 };
 
