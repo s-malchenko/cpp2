@@ -9,21 +9,15 @@ Date::Date()
 Date::Date(const string &str)
 {
     stringstream ss(str.c_str());
-    int year, month, day;
-    char c;
-    checkFormat(bool(ss >> year), str);
-    checkFormat(bool(ss >> c), str);
-    checkFormat(c == '-', str);
-    checkFormat(bool(ss >> month), str);
-    checkFormat(bool(ss >> c), str);
-    checkFormat(c == '-', str);
-    checkFormat(bool(ss >> day), str);
-    checkFormat(!(ss >> c), str);
-    setDate(year, month, day);
+    setDate(ss);
 }
 Date::Date(int year, int month, int day)
 {
     setDate(year, month, day);
+}
+Date::Date(istream &is)
+{
+    setDate(is);
 }
 int Date::GetYear() const { return _year; }
 int Date::GetMonth() const { return _month; }
@@ -52,6 +46,21 @@ void Date::setDate(int year, int month, int day)
     _year = year;
     _month = month;
     _day = day;
+}
+
+void Date::setDate(istream &is)
+{
+    int year, month, day;
+    char c;
+    checkFormat(bool(ss >> year), str);
+    checkFormat(bool(ss >> c), str);
+    checkFormat(c == '-', str);
+    checkFormat(bool(ss >> month), str);
+    checkFormat(bool(ss >> c), str);
+    checkFormat(c == '-', str);
+    checkFormat(bool(ss >> day), str);
+    checkFormat(!(ss >> c), str);
+    setDate(year, month, day);
 }
 
 bool operator<(const Date &lhs, const Date &rhs)
@@ -87,4 +96,9 @@ ostream &operator<<(ostream &stream, const Date &date)
     stream << setfill('0') << setw(4) << date.GetYear() << "-"
            << setw(2) << date.GetMonth() << "-" << setw(2) << date.GetDay();
     return stream;
+}
+
+Date ParseDate(istream &is)
+{
+    return {is};
 }

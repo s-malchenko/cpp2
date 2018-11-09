@@ -1,7 +1,6 @@
 #include "database.h"
 #include "date.h"
-// #include "condition_parser.h"
-// #include "node.h"
+#include "condition_parser.h"
 #include "test_runner.h"
 
 #include <iostream>
@@ -121,5 +120,5 @@ void TestAll()
 {
     TestRunner tr;
     tr.RunTest(TestParseEvent, "TestParseEvent");
-    // tr.RunTest(TestParseCondition, "TestParseCondition");
+    tr.RunTest(TestParseCondition, "TestParseCondition");
 }
