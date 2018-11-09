@@ -3,14 +3,14 @@
 
 void Database::Add(const Date &date, const string &event)
 {
+    _base[date].push_back(event);
 }
 
-int Database::RemoveIf(function<bool(const Date& date, const string& even)> pred)
+size_t Database::RemoveIf(function<bool(const Date &date, const string &event)> pred)
 {
-    return 1;
 }
 
-set<string> Database::FindIf(function<bool(const Date& date, const string& even)> pred) const
+set<string> Database::FindIf(function<bool(const Date &date, const string &event)> pred) const
 {
     return {};
 }
@@ -19,7 +19,7 @@ void Database::Print(ostream &os) const
 {
 }
 
-string Database::Last(const Date& date) const
+string Database::Last(const Date &date) const
 {
     return {};
 }
