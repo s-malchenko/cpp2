@@ -1,11 +1,19 @@
 #include "date.h"
 #include <string>
+#include <memory>
 
 using namespace std;
 
-struct Node
+class Node
 {
-    virtual int Evaluate() const = 0;
+public:
+    virtual bool Evaluate(const Date &date, const string &event) const = 0;
+};
+
+class EmptyNode : public Node
+{
+public:
+    bool Evaluate(const Date &date, const string &event) const override;
 };
 
 enum Comparison
@@ -24,31 +32,36 @@ enum LogicalOperation
     And
 };
 
-struct DateComparisonNode : public Node
+class DateComparisonNode : public Node
 {
-    DateComparisonNode(Comparison cmp, const Date &date) : _cmp(cmp), _date(date) {}
+public:
+    DateComparisonNode(Comparison cmp, const Date &date);
+    bool Evaluate(const Date &date, const string &event) const override;
 
 private:
     const Comparison _cmp;
     const Date _date;
 };
 
-struct EventComparisonNode : public Node
+class EventComparisonNode : public Node
 {
-    EventComparisonNode(Comparison cmp, const string &event) : _cmp(cmp), _event(event) {}
+public:
+    EventComparisonNode(Comparison cmp, const string &event);
+    bool Evaluate(const Date &date, const string &event) const override;
 
 private:
     const Comparison _cmp;
     const string _event;
 };
 
-struct LogicalOperationNode : public Node
+class LogicalOperationNode : public Node
 {
-    LogicalOperationNode(LogicalOperation op, const Node &left, const Node &right) :
-    _op(op), _left(left), _right(right) {}
+public:
+    LogicalOperationNode(LogicalOperation op, const shared_ptr<Node> &left, const shared_ptr<Node> &right);
+    bool Evaluate(const Date &date, const string &event) const override;
 
 private:
     const LogicalOperation _op;
-    const Node _left;
-    const Node _right;
+    shared_ptr<Node> _left;
+    shared_ptr<Node> _right;
 };

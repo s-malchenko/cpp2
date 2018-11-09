@@ -8,8 +8,7 @@ Date::Date()
 }
 Date::Date(const string &str)
 {
-    stringstream ss(str.c_str());
-    setDate(ss);
+
 }
 Date::Date(int year, int month, int day)
 {
@@ -17,7 +16,9 @@ Date::Date(int year, int month, int day)
 }
 Date::Date(istream &is)
 {
-    setDate(is);
+    string str;
+    is >> str;
+    setDate(str);
 }
 int Date::GetYear() const { return _year; }
 int Date::GetMonth() const { return _month; }
@@ -48,8 +49,9 @@ void Date::setDate(int year, int month, int day)
     _day = day;
 }
 
-void Date::setDate(istream &is)
+void Date::setDate(const string &str)
 {
+    istringstream ss(str.c_str());
     int year, month, day;
     char c;
     checkFormat(bool(ss >> year), str);
@@ -89,6 +91,33 @@ bool operator<(const Date &lhs, const Date &rhs)
     }
 
     return false;
+}
+
+bool operator==(const Date &lhs, const Date &rhs)
+{
+    return (lhs.GetYear() == rhs.GetYear() &&
+           lhs.GetMonth() == rhs.GetMonth() &&
+           lhs.GetDay() == rhs.GetDay());
+}
+
+bool operator>=(const Date &lhs, const Date &rhs)
+{
+    return !(lhs < rhs);
+}
+
+bool operator>(const Date &lhs, const Date &rhs)
+{
+    return !(lhs < rhs || lhs == rhs);
+}
+
+bool operator<=(const Date &lhs, const Date &rhs)
+{
+    return !(lhs > rhs);
+}
+
+bool operator!=(const Date &lhs, const Date &rhs)
+{
+    return !(lhs == rhs);
 }
 
 ostream &operator<<(ostream &stream, const Date &date)
