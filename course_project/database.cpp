@@ -1,63 +1,25 @@
 #include "database.h"
-#include <iostream>
+#include <ostream>
 
-void Database::AddEvent(const Date &date, const string &event)
+void Database::Add(const Date &date, const string &event)
 {
-    base[date].insert(event);
 }
 
-bool Database::DeleteEvent(const Date &date, const string &event)
+int Database::RemoveIf(function<bool(const Date& date, const string& even)> pred)
 {
-    try
-    {
-        if (base.at(date).count(event))
-        {
-            base[date].erase(event);
-
-            if (base[date].empty())
-            {
-                base.erase(date);
-            }
-
-            return true;
-        }
-    }
-    catch (...) {}
-
-    return false;
-}
-int Database::DeleteDate(const Date &date)
-{
-    size_t n = 0;
-
-    try
-    {
-        n = base.at(date).size();
-        base.erase(date);
-    }
-    catch (...) {}
-
-    return n;
+    return 1;
 }
 
-set<string> Database::Find(const Date &date) const
+set<string> Database::FindIf(function<bool(const Date& date, const string& even)> pred) const
 {
-    try
-    {
-        return base.at(date);
-    }
-    catch (...) {}
-
     return {};
 }
 
-void Database::Print() const
+void Database::Print(ostream &os) const
 {
-    for (auto date : base)
-    {
-        for (auto i : date.second)
-        {
-            cout << date.first << " " << i << endl;
-        }
-    }
+}
+
+string Database::Last(const Date& date) const
+{
+    return {};
 }
