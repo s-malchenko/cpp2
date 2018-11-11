@@ -29,6 +29,7 @@ void Database::Add(const Date &date, const string &event)
     if (!_baseSet[date].count(event))
     {
         _base[date].push_back(event);
+        _baseSet[date].insert(event);
     }
 }
 
