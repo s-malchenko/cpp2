@@ -10,7 +10,7 @@ project (course)
 add_executable(	course
 		        main.cpp
                 condition_parser.cpp
-                condition_parser_test.cpp
+                #condition_parser_test.cpp
                 token.cpp
                 database.cpp
                 date.cpp
